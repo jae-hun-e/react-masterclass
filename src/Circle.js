@@ -27,8 +27,16 @@ function Circle({ bgColor, borderColor }: CirecleProps) {
   // const [value, setValue] = useState<number|string>(0) //! 타입 여러개로 지정해줄 때
   const [count, setCount] = useState(0); //! 타입 안적으면 defalut값으로 TS가 알아서 추축한다.
 
+  const onClick = () => {
+    setCount(+1);
+  };
   // ! 사용자가 정해준 속성값이 없으면 ?? 뒤에 default값 지정해줌
-  return <Container bgColor={bgColor} borderColor={borderColor ?? "red"} />;
+  return (
+    <>
+      <div onClick={onClick}>{count}</div>
+      <Container bgColor={bgColor} borderColor={borderColor ?? "red"} />;
+    </>
+  );
 }
 
 export default Circle;

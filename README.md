@@ -2,11 +2,8 @@
 
 <p>1.1 ~</p>
 
-<ul>학습 목표
-<ol>
-1. react js 익히기
+<ol>학습 목표
+<li>react js 익히기</li>
+<li>typescript 익히기</li>
+<li>styled components 익히기</li>
 </ol>
-<ol>
-2. styled components 익히기
-</ol>
-</ul>

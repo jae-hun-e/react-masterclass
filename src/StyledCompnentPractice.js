@@ -75,10 +75,10 @@ const Animation = styled.div`
     &:hover {
       font-size: 30px;
     }
-    ${Emoji} {
-      &:active {
-        opacity: 0;
-      }
+  }
+  ${Emoji} {
+    &:active {
+      opacity: 0;
     }
   }
 `;

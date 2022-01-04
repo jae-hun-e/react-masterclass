@@ -7,3 +7,5 @@
 <li>typescript 익히기</li>
 <li>styled components 익히기</li>
 </ol>
+
+<h4>API : https://api.coinpaprika.com/</h4>

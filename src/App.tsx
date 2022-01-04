@@ -1,10 +1,10 @@
 // import Circle from "./Circle";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Form from "./Form";
 import { ThemeProvider } from "styled-components";
-import Home from "./Home";
-import { lightTheme, dartTheme, blueTheme } from "./theme";
-import { useState } from "react";
+import { theme } from "./theme";
+import Router from "./routes/Router";
+import Circle from "./Circle";
 
 const Flex = styled.div`
   display: flex;
@@ -13,46 +13,85 @@ const Flex = styled.div`
   align-items: center;
 `;
 
-let themeColor = blueTheme;
-
 function App() {
-  const themeName = [lightTheme, dartTheme, blueTheme];
-  const [theme, setTheme] = useState(false);
-
-  //! 마우스 이벤트 type : MouseEvent<HTMLElement>
-  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log(event.currentTarget.value);
-    const {
-      currentTarget: { value },
-    } = event;
-    // setTheme(themeName[value]);
-
-    setTheme(!theme);
-    if (theme === true) themeColor = dartTheme;
-    else themeColor = blueTheme;
-  };
-
   return (
-    <>
-      <Flex>
-        <Form />
-        {/* // ! Theme을 사용하려는 component를 ThmeeProvider로 감싸준다. */}
-        {/* <button onClick={onClick} value={+0}>
-        라이트모드
-        </button>
-        <button onClick={onClick} value={+1}>
-        다크모드
-        </button>
-        <button onClick={onClick} value={+2}>
-        블루모드
-      </button> */}
-        <button onClick={onClick}>모드 변경</button>
-      </Flex>
-      <ThemeProvider theme={themeColor}>
-        <Home />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router />
+      {/* <Circle bgColor={theme.textColor} /> */}
+      {/* <Circle
+          bgColor={theme.bgColor}
+          borderColor={theme.textColor}
+          accentColor={theme.accentColor}
+        /> */}
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+//! styled-reset : https://www.npmjs.com/package/styled-reset
+const GlobalStyle = createGlobalStyle`
+/* //! font.google.com에서 font import해오기 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+  line-height: 1;
+}
+menu, ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*{
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Nanum Brush Script', cursive;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+}
+
+a{
+  text-decoration: none;
+  color: inherit; // 부모것을 가져와라
+}
+`;

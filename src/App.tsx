@@ -88,6 +88,7 @@ body{
   font-family: 'Nanum Brush Script', cursive;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
+  line-height: 1.2;
 }
 
 a{

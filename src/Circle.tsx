@@ -34,7 +34,7 @@ function Circle({ bgColor, borderColor }: CirecleProps) {
   return (
     <>
       <div onClick={onClick}>{count}</div>
-      <Container bgColor={bgColor} borderColor={borderColor ?? "red"} />;
+      <Container bgColor={bgColor} borderColor={borderColor ?? "red"} />
     </>
   );
 }

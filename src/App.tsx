@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import Home from "./Home";
 import { lightTheme, dartTheme, blueTheme } from "./theme";
 import { useState } from "react";
+import Circle from "./Circle";
 
 const Flex = styled.div`
   display: flex;
@@ -48,8 +49,18 @@ function App() {
       </button> */}
         <button onClick={onClick}>모드 변경</button>
       </Flex>
-      <ThemeProvider theme={themeColor}>
+      {/* <ThemeProvider theme={themeColor}>
         <Home />
+        <Circle bgColor={}/>
+      </ThemeProvider> */}
+      <ThemeProvider theme={themeColor}>
+        <Flex>
+          <Home />
+          <Circle
+            bgColor={themeColor.bgColor}
+            borderColor={themeColor.textColor}
+          />
+        </Flex>
       </ThemeProvider>
     </>
   );

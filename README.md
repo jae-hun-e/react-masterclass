@@ -9,3 +9,10 @@
 </ol>
 
 <h4>API : https://api.coinpaprika.com/</h4>
+
+<ol>todoList
+<li>뒤로가기 버튼</li>
+<li>캔들 차트 만들기</li>
+<li>가격정보</li>
+<li>한글로 변경</li>
+</ol>

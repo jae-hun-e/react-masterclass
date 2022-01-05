@@ -184,9 +184,9 @@ function Coin() {
 
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
-  console.log(priceMatch);
-  console.log(chartMatch);
-  fetchCoinPrice(coinId);
+  // console.log(priceMatch);
+  // console.log(chartMatch);
+
   return (
     <Container>
       <Header>

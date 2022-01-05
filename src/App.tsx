@@ -1,6 +1,5 @@
 // import Circle from "./Circle";
-import styled, { createGlobalStyle } from "styled-components";
-import Form from "./Form";
+import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import Router from "./routes/Router";
@@ -17,12 +16,6 @@ function App() {
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           <Router />
-          {/* <Circle bgColor={theme.textColor} /> */}
-          {/* <Circle
-          bgColor={theme.bgColor}
-          borderColor={theme.textColor}
-          accentColor={theme.accentColor}
-        /> */}
         </ThemeProvider>
         {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
         <ReactQueryDevtools initialIsOpen={true} />

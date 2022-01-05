@@ -1,8 +1,55 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchCoins } from "../api";
+
+interface CoinProps {
+  id: string;
+  name: string;
+  symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
+}
+
+function Coins() {
+  const { isLoading: loading, data: coins } = useQuery<CoinProps[]>(
+    "allCoins",
+    fetchCoins
+  );
+
+  return (
+    <Container>
+      <Header>
+        <Title>코인</Title>
+      </Header>
+      {loading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <CoinsList>
+          {coins?.slice(0, 100).map((coin) => (
+            <Coin key={coin.id}>
+              {/* //! Link의 to에 데이터를 담아서 보내면 다음 페이지로 넘어갈 때 data도 같이 보내 줄 수 있다. */}
+              <Link
+                to={{
+                  pathname: `/${coin.id}`,
+                  state: { name: coin.name },
+                }}
+              >
+                <Img
+                  src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                />
+                {coin.name} &rarr;
+              </Link>
+            </Coin>
+          ))}
+        </CoinsList>
+      )}
+    </Container>
+  );
+}
+export default Coins;
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -52,60 +99,3 @@ const Img = styled.img`
   height: 35px;
   margin-right: 10px;
 `;
-
-interface CoinProps {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-}
-
-function Coins() {
-  // const [coins, setCoins] = useState<CoinProps[]>([]);
-  // const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch("https://api.coinpaprika.com/v1/coins");
-  //     const json = await response.json();
-  //     setCoins(json.slice(0, 50));
-  //     setLoading(false);
-  //   })();
-  // }, []);
-  const { isLoading, data } = useQuery<CoinProps[]>("allCoins", fetchCoins);
-
-  // console.log(error);
-  // console.log(isLoading, data);
-  return (
-    <Container>
-      <Header>
-        <Title>코인</Title>
-      </Header>
-      {isLoading ? (
-        <Loader>Loading...</Loader>
-      ) : (
-        <CoinsList>
-          {data?.slice(0, 100).map((coin) => (
-            <Coin key={coin.id}>
-              {/* //! Link의 to에 데이터를 담아서 보내면 다음 페이지로 넘어갈 때 data도 같이 보내 줄 수 있다. */}
-              <Link
-                to={{
-                  pathname: `/${coin.id}`,
-                  state: { name: coin.name },
-                }}
-              >
-                <Img
-                  src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
-                />
-                {coin.name} &rarr;
-              </Link>
-            </Coin>
-          ))}
-        </CoinsList>
-      )}
-    </Container>
-  );
-}
-export default Coins;

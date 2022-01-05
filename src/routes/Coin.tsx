@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Switch, useRouteMatch, Route, Link } from "react-router-dom";
 import Price from "./Price";
 import Chart from "./Chart";
+import { fetchCoinInfo, fetchCoinPrice } from "../api";
+import { useQuery } from "react-query";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -147,33 +149,44 @@ interface PriceData {
 
 function Coin() {
   const { coinId } = useParams<CoinProps>();
-  const [loading, setLoading] = useState(true);
   //!여기서 <>안의 타입은 state에 대한 타입이다!!  등호 왼쪽에 들어갈 값의 타입을 알려주는것임
   const { state } = useLocation<StateProps>();
+  // const [loading, setLoading] = useState(true);
   // console.log(state.name);
-  const [info, setInfo] = useState<InfoData>(); //! 초기값을 빈객체로하면 빈객체만들어갈 수 있다. 그래서 초기값도 지정해줘야함
-  const [priceInfo, setPriceInfo] = useState<PriceData>();
+  // const [info, setInfo] = useState<InfoData>(); //! 초기값을 빈객체로하면 빈객체만들어갈 수 있다. 그래서 초기값도 지정해줘야함
+  // const [priceInfo, setPriceInfo] = useState<PriceData>();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const infoData = await (
+  //       await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
+  //     ).json();
+  //     console.log(infoData);
+  //     const priceData = await (
+  //       await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
+  //     ).json();
+  //     console.log(priceData);
+  //     setInfo(infoData);
+  //     setPriceInfo(priceData);
+  //     setLoading(false);
+  //   })();
+  // }, [coinId]); //! coinId는 이 component가 생성될때 1번만 생기고 안 변하므로 []과 기능적으로 같아진다.
+
+  const { isLoading: infoLoding, data: info } = useQuery<InfoData>(
+    ["info", coinId],
+    () => fetchCoinInfo(coinId)
+  );
+  const { isLoading: tickersLoading, data: priceInfo } = useQuery<PriceData>(
+    ["tichers", coinId],
+    () => fetchCoinPrice(coinId)
+  );
+  const loading = infoLoding || tickersLoading;
+
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
   console.log(priceMatch);
   console.log(chartMatch);
-
-  useEffect(() => {
-    (async () => {
-      const infoData = await (
-        await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
-      ).json();
-      console.log(infoData);
-      const priceData = await (
-        await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
-      ).json();
-      console.log(priceData);
-      setInfo(infoData);
-      setPriceInfo(priceData);
-      setLoading(false);
-    })();
-  }, [coinId]); //! coinId는 이 component가 생성될때 1번만 생기고 안 변하므로 []과 기능적으로 같아진다.
-
+  fetchCoinPrice(coinId);
   return (
     <Container>
       <Header>

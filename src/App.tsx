@@ -4,27 +4,25 @@ import Form from "./Form";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import Router from "./routes/Router";
-import Circle from "./Circle";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-const Flex = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+// ! react-query import
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Router />
-      {/* <Circle bgColor={theme.textColor} /> */}
-      {/* <Circle
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Router />
+        {/* <Circle bgColor={theme.textColor} /> */}
+        {/* <Circle
           bgColor={theme.bgColor}
           borderColor={theme.textColor}
           accentColor={theme.accentColor}
         /> */}
-    </ThemeProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

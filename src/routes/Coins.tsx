@@ -77,7 +77,7 @@ function Coins() {
   const { isLoading, data } = useQuery<CoinProps[]>("allCoins", fetchCoins);
 
   // console.log(error);
-  // console.log(data);
+  // console.log(isLoading, data);
   return (
     <Container>
       <Header>

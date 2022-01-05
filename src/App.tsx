@@ -5,24 +5,29 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import Router from "./routes/Router";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 // ! react-query import
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Router />
-        {/* <Circle bgColor={theme.textColor} /> */}
-        {/* <Circle
+    <>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Router />
+          {/* <Circle bgColor={theme.textColor} /> */}
+          {/* <Circle
           bgColor={theme.bgColor}
           borderColor={theme.textColor}
           accentColor={theme.accentColor}
         /> */}
-      </ThemeProvider>
-    </QueryClientProvider>
+        </ThemeProvider>
+        {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
+        <ReactQueryDevtools initialIsOpen={true} />
+      </QueryClientProvider>
+    </>
   );
 }
 

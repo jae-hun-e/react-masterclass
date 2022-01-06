@@ -13,7 +13,12 @@
 <li>recoil 익히기</li>
 </ol>
 
-<h4>API : https://api.coinpaprika.com/</h4>
+<h3>참고</h3>
+<h5>CoinAPI : https://api.coinpaprika.com/</h5>
+<h5>react-query : https://react-query.tanstack.com/</h5>
+<h5>react-router : https://reactrouter.com/</h5>
+<h5>recoil : https://recoiljs.org/ko/</h5>
+<h5>apexChart API : https://apexcharts.com/</h5>
 
 <ol>todoList
 <li>뒤로가기 버튼</li>

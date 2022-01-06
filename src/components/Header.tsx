@@ -1,13 +1,9 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { modeChange } from "../atoms";
 
-interface ChangeModeProps {
-  mode: boolean;
-}
-
-function ChangeMode({ mode }: ChangeModeProps) {
-  const setMode = useSetRecoilState(modeChange);
+function Header() {
+  const [mode, setMode] = useRecoilState(modeChange);
   const toggleMode = () => setMode((prev) => !prev);
   return (
     <Container>
@@ -15,7 +11,7 @@ function ChangeMode({ mode }: ChangeModeProps) {
     </Container>
   );
 }
-export default ChangeMode;
+export default Header;
 
 const Container = styled.div`
   display: flex;

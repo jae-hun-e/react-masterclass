@@ -5,9 +5,9 @@ import { darkTheme, lightTheme } from "./theme";
 import Router from "./routes/Router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { modeChange } from "./atoms";
-import ChangeMode from "./components/ChangeMode";
+import Header from "./components/Header";
 // ! react-query import
 const queryClient = new QueryClient();
 
@@ -17,7 +17,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={mode ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <ChangeMode mode={mode} />
+        <Header />
         <Router />
       </ThemeProvider>
       {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}

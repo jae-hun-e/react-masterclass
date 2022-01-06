@@ -81,10 +81,9 @@ interface PriceData {
 
 function Coin() {
   const { coinId } = useParams<CoinProps>();
-  const data1 = useParams<CoinProps>();
+  // const data1 = useParams<CoinProps>();
   const { state } = useLocation<StateProps>();
-  const data2 = useLocation<StateProps>();
-  console.log(data1, data2);
+  // const data2 = useLocation<StateProps>();
   const { isLoading: infoLoding, data: info } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),
@@ -98,8 +97,8 @@ function Coin() {
 
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
-  // console.log(priceMatch);
-  // console.log(chartMatch);
+  console.log(priceMatch);
+  console.log(chartMatch);
 
   return (
     <Container>
@@ -147,12 +146,12 @@ function Coin() {
           </Tabs>
           {/* //! 탭을 위한 라우터 만들기 */}
           <Switch>
-            {/* //! :coinId 와 ${coinId} 둘다 작동한다 react-router 덕분에 변수도 인식한다 */}
-            <Route path={`/:coinId/price`}>
+            {/* //! :아무거나 와 ${coinId} 둘다 작동한다 react-router 덕분에 :는 변수로 인식해서 가능 */}
+            <Route path={`/:Id/price`}>
               <Price />
             </Route>
             <Route path={`/${coinId}/chart`}>
-              <Chart />
+              <Chart coinId={coinId} />
             </Route>
           </Switch>
         </>

@@ -1,11 +1,12 @@
 import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { Switch, useRouteMatch, Route, Link } from "react-router-dom";
 import Price from "./Price";
 import Chart from "./Chart";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 import { useQuery } from "react-query";
+import { useSetRecoilState } from "recoil";
+import { modeChange } from "../atoms";
 
 interface CoinProps {
   coinId: string;
@@ -80,10 +81,11 @@ interface PriceData {
 }
 
 function Coin() {
+  const setMode = useSetRecoilState(modeChange);
+
   const { coinId } = useParams<CoinProps>();
-  // const data1 = useParams<CoinProps>();
   const { state } = useLocation<StateProps>();
-  // const data2 = useLocation<StateProps>();
+
   const { isLoading: infoLoding, data: info } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),

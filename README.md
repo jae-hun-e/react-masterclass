@@ -1,11 +1,16 @@
 <h1>React MasterClass Pratice</h1>
+<h2>Coin Store</h2>
 
-<p>1.1 ~</p>
+<p>1.3 ~</p>
 
 <ol>학습 목표
 <li>react js 익히기</li>
 <li>typescript 익히기</li>
 <li>styled components 익히기</li>
+<li>react-query 익히기</li>
+<li>react-router hook 익히기</li>
+<li>apexChart API 익히기</li>
+<li>recoil 익히기</li>
 </ol>
 
 <h4>API : https://api.coinpaprika.com/</h4>

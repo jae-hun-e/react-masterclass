@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { modeChange } from "../atoms";
@@ -5,8 +6,12 @@ import { modeChange } from "../atoms";
 function Header() {
   const [mode, setMode] = useRecoilState(modeChange);
   const toggleMode = () => setMode((prev) => !prev);
+
   return (
     <Container>
+      <Btn>
+        <Link to="/">Home</Link>
+      </Btn>
       <Btn onClick={toggleMode}> {mode ? "다크모드" : "라이트모드"}</Btn>
     </Container>
   );

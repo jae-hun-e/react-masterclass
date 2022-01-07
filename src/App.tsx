@@ -1,36 +1,21 @@
-// import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./theme";
-import Router from "./routes/Router";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { useRecoilValue } from "recoil";
-import { modeChange } from "./atoms";
-
-// ! react-query import
-const queryClient = new QueryClient();
+import ToDoList from "./components/ToDoList";
 
 function App() {
-  const mode = useRecoilValue(modeChange);
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={mode ? darkTheme : lightTheme}>
-        <GlobalStyle />
-        <Router />
-      </ThemeProvider>
-      {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
-      <ReactQueryDevtools initialIsOpen={true} />
-    </QueryClientProvider>
+    <>
+      <GlobalStyle />
+      <ToDoList />
+    </>
   );
 }
 
 export default App;
 
 //! styled-reset : https://www.npmjs.com/package/styled-reset
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap'); */
 const GlobalStyle = createGlobalStyle`
 /* //! font.google.com에서 font import해오기 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

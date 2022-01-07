@@ -1,75 +1,19 @@
 // import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "styled-components";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Home from "./Home";
-import { lightTheme, dartTheme, blueTheme } from "./theme";
-import { useState } from "react";
-import Circle from "./Circle";
-=======
-import { theme } from "./theme";
-import Router from "./routes/Router";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
->>>>>>> d5a0ce1f7854b7ce7c1ff61f32324a83a1abd58a
-
-=======
 import { darkTheme, lightTheme } from "./theme";
 import Router from "./routes/Router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useRecoilValue } from "recoil";
 import { modeChange } from "./atoms";
->>>>>>> coin
+
 // ! react-query import
 const queryClient = new QueryClient();
 
 function App() {
   const mode = useRecoilValue(modeChange);
   return (
-<<<<<<< HEAD
-    <>
-<<<<<<< HEAD
-      <Flex>
-        <Form />
-        {/* // ! Theme을 사용하려는 component를 ThmeeProvider로 감싸준다. */}
-        {/* <button onClick={onClick} value={+0}>
-        라이트모드
-        </button>
-        <button onClick={onClick} value={+1}>
-        다크모드
-        </button>
-        <button onClick={onClick} value={+2}>
-        블루모드
-      </button> */}
-        <button onClick={onClick}>모드 변경</button>
-      </Flex>
-      {/* <ThemeProvider theme={themeColor}>
-        <Home />
-        <Circle bgColor={}/>
-      </ThemeProvider> */}
-      <ThemeProvider theme={themeColor}>
-        <Flex>
-          <Home />
-          <Circle
-            bgColor={themeColor.bgColor}
-            borderColor={themeColor.textColor}
-          />
-        </Flex>
-      </ThemeProvider>
-=======
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Router />
-        </ThemeProvider>
-        {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
-        <ReactQueryDevtools initialIsOpen={true} />
-      </QueryClientProvider>
->>>>>>> d5a0ce1f7854b7ce7c1ff61f32324a83a1abd58a
-    </>
-=======
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={mode ? darkTheme : lightTheme}>
         <GlobalStyle />
@@ -78,7 +22,6 @@ function App() {
       {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
->>>>>>> coin
   );
 }
 

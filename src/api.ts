@@ -22,3 +22,11 @@ export function fetchCoinHistory(coinId: string) {
     `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`
   ).then((res) => res.json());
 }
+
+export function fetchCoinPriceHistory(coinId: string) {
+  const endDate = Math.floor(Date.now() / 1000);
+  const startDate = endDate - 60 * 60 * 24;
+  return fetch(
+    `${BASE_URL}/tickers/${coinId}/historical?start=${startDate}&end=${endDate}`
+  ).then((res) => res.json());
+}

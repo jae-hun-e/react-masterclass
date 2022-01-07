@@ -1,11 +1,11 @@
 import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { Switch, useRouteMatch, Route, Link } from "react-router-dom";
 import Price from "./Price";
 import Chart from "./Chart";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 import { useQuery } from "react-query";
+import { Helmet } from "react-helmet";
 
 interface CoinProps {
   coinId: string;
@@ -81,27 +81,29 @@ interface PriceData {
 
 function Coin() {
   const { coinId } = useParams<CoinProps>();
-  // const data1 = useParams<CoinProps>();
   const { state } = useLocation<StateProps>();
-  // const data2 = useLocation<StateProps>();
+
   const { isLoading: infoLoding, data: info } = useQuery<InfoData>(
     ["info", coinId],
-    () => fetchCoinInfo(coinId),
-    { refetchInterval: 5000 }
+    () => fetchCoinInfo(coinId)
   );
   const { isLoading: tickersLoading, data: priceInfo } = useQuery<PriceData>(
     ["tichers", coinId],
     () => fetchCoinPrice(coinId)
+    // { refetchInterval: 5000 }
   );
   const loading = infoLoding || tickersLoading;
 
-  const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
-  console.log(priceMatch);
-  console.log(chartMatch);
+  const priceMatch = useRouteMatch("/:coinId/toDayPrice");
 
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : info?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : info?.name}
@@ -121,8 +123,8 @@ function Coin() {
               <span>${info?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{info?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>{priceInfo?.quotes?.USD?.price?.toFixed(8)}</span>
             </OverviewItem>
           </Overview>
           <Description>{info?.description}</Description>
@@ -141,14 +143,14 @@ function Coin() {
               <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/${coinId}/toDayPrice`}>ToDay Price</Link>
             </Tab>
           </Tabs>
           {/* //! 탭을 위한 라우터 만들기 */}
           <Switch>
             {/* //! :아무거나 와 ${coinId} 둘다 작동한다 react-router 덕분에 :는 변수로 인식해서 가능 */}
-            <Route path={`/:Id/price`}>
-              <Price />
+            <Route path={`/:Id/toDayPrice`}>
+              <Price coinId={coinId} />
             </Route>
             <Route path={`/${coinId}/chart`}>
               <Chart coinId={coinId} />

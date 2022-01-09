@@ -9,7 +9,11 @@ function ToDoList() {
   console.log(`${toDos[0]?.category} toDos`, toDos);
   const [category, setCategory] = useRecoilState(categoryState);
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
+    //!case1
     setCategory(Number(event.currentTarget.value));
+
+    //!case2
+    // setCategory(event.currentTarget.value as any);
   };
   return (
     <>
@@ -27,29 +31,6 @@ function ToDoList() {
       {toDos?.map((toDo, idx) => (
         <ToDo key={idx} {...toDo} />
       ))}
-      {/* 
-      <h2>To Do</h2>
-      <ul>
-        {toDo?.map((toDo, idx) => (
-          <ToDo key={idx} {...toDo} />
-        ))}
-      </ul>
-      <hr />
-
-      <h2>Doing</h2>
-      <ul>
-        {doing?.map((toDo, idx) => (
-          <ToDo key={idx} {...toDo} />
-        ))}
-      </ul>
-      <hr />
-
-      <h2>done</h2>
-      <ul>
-        {done?.map((toDo, idx) => (
-          <ToDo key={idx} {...toDo} />
-        ))}
-      </ul> */}
     </>
   );
 }

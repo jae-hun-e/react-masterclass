@@ -17,7 +17,7 @@ function CreateToDo() {
 
   const setToDos = useSetRecoilState(toDoState);
   const category = useRecoilValue(categoryState);
-  console.log("oldcategory", category, typeof category);
+  console.log("currentCategory", category, typeof category);
   const valid = ({ toDo }: IForm) => {
     // console.log(toDo);
     setToDos((oldToDos) => [

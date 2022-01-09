@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
-import { toDoState } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { categoryState, toDoState } from "../atoms";
 
 interface IForm {
   toDo: string;
@@ -16,10 +16,12 @@ function CreateToDo() {
   } = useForm<IForm>();
 
   const setToDos = useSetRecoilState(toDoState);
+  const category = useRecoilValue(categoryState);
+  console.log("oldcategory", category, typeof category);
   const valid = ({ toDo }: IForm) => {
-    console.log(toDo);
+    // console.log(toDo);
     setToDos((oldToDos) => [
-      { text: toDo, id: Date.now(), category: "TO_DO" },
+      { text: toDo, id: Date.now(), category },
       ...oldToDos,
     ]);
     setValue("toDo", "");
@@ -39,6 +41,5 @@ function CreateToDo() {
 export default CreateToDo;
 
 const Form = styled.form`
-  margin-top: 20px;
   font-size: 20px;
 `;

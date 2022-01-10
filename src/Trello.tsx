@@ -1,21 +1,59 @@
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-
-const toDos = ["a", "b", "c", "d", "e", "f", "g"];
+import { toDoState } from "./trelloAtom";
 
 function Trello() {
-  const onDragEnd = () => {};
+  const [list, setList] = useRecoilState(toDoState);
+  const onDragEnd = (args: DropResult) => {
+    console.log(
+      "draggin finished",
+      args.draggableId,
+      args.source.index,
+      "=>",
+      args.destination.droppableId,
+      args.destination.index,
+      args
+    );
+    // ! 같은 자리에 두었을 때
+    if (!args.draggableId) return;
+    setList((oldList) => {
+      const dragIndex = args.source.index;
+      const dropIndex = args.destination?.index;
+      // ! 깊은 복사 두 가지 방법
+      // const newList = oldList.slice();
+      const newList = [...oldList];
+      newList.splice(dragIndex, 1);
+      newList.splice(dropIndex, 0, args.draggableId);
+      console.log(
+        "dragIndex",
+        dragIndex,
+        "dropIndex",
+        dropIndex,
+        "newList",
+        newList
+      );
+
+      return newList;
+    });
+  };
   return (
     <Container>
       <DragDropContext onDragEnd={onDragEnd}>
-        <span>Trello</span>
+        <Title>Trello cloning</Title>
         <Boards>
           {/* <Droppable droppableId="one"><ul></ul></Droppable> */}
           <Droppable droppableId="one">
             {(provided) => (
               <Board ref={provided.innerRef} {...provided.droppableProps}>
-                {toDos.map((toDo, idx) => (
-                  <Draggable draggableId={toDo} index={idx}>
+                {list.map((toDo, idx) => (
+                  // ! key랑 draggableId랑 같아야 함 dnd에서 그렇게 정함
+                  <Draggable key={toDo} draggableId={toDo} index={idx}>
                     {(provided) => (
                       <Card
                         ref={provided.innerRef}
@@ -28,14 +66,16 @@ function Trello() {
                     )}
                   </Draggable>
                 ))}
-                <Draggable draggableId="second" index={1}>
+                {/* //! 옮길 수 있는 요소 선택 */}
+                {/* <Draggable draggableId="second" index={1}>
                   {(provided) => (
                     <Card ref={provided.innerRef} {...provided.draggableProps}>
                       <span {...provided.dragHandleProps}>🥱</span>
                       two
                     </Card>
                   )}
-                </Draggable>
+                </Draggable> */}
+                {/* //! 태두리 크기 고정 */}
                 {provided.placeholder}
               </Board>
             )}
@@ -56,6 +96,12 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: 480px;
   height: 100vh;
+`;
+
+const Title = styled.span`
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
 `;
 
 const Boards = styled.div`

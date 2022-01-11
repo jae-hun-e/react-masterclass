@@ -8,17 +8,6 @@ interface IToDoState {
 
 export const toDoState = atom<IToDoState>({
   key: "ToDo_Trello",
-  // default: ["a", "b", "c", "d", "e", "f", "g"],
-  default: {
-    To_Do: ["a", "b", "c"],
-    Doing: ["d", "e"],
-    Done: ["f", "g"],
-  },
-});
-
-export const toDoState2 = atom<IToDoState>({
-  key: "ToDo_Trello2",
-  // default: ["a", "b", "c", "d", "e", "f", "g"],
   default: {
     To_Do: ["a", "b", "c"],
     Doing: ["d", "e"],

@@ -10,7 +10,7 @@ interface IBoardProps {
 function TrelloBoard({ list, boardId }: IBoardProps) {
   return (
     <Cotainer>
-      <div>{boardId}</div>
+      <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
         {(provided) => (
           <Wrapper ref={provided.innerRef} {...provided.droppableProps}>
@@ -29,12 +29,27 @@ export default TrelloBoard;
 const Cotainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: ${(props) => props.theme.boardColor};
+  border-radius: 5px;
   justify-content: center;
   align-items: center;
 `;
 
 const Wrapper = styled.ul`
-  background-color: ${(props) => props.theme.boardColor};
-  border-radius: 10px;
-  padding: 10px;
+  width: 200px;
+  padding: 20px 10px;
+  padding-top: 20px;
+
+  min-height: 300px;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  width: 100%;
+  height: 30px;
+  padding-top: 5px;
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.accentColor};
 `;

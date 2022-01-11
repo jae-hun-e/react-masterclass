@@ -18,7 +18,7 @@ function Trello() {
       args
     );
     // ! 같은 자리에 두었을 때
-    // if (!args.draggableId) return;
+    if (!args.draggableId) return;
     // setList((oldList) => {
     //   const dragIndex = args.source.index;
     //   const dropIndex = args.destination?.index;
@@ -35,7 +35,6 @@ function Trello() {
     //     "newList",
     //     newList
     //   );
-
     //   return newList;
     // });
   };
@@ -72,8 +71,9 @@ const Title = styled.span`
 `;
 
 const Boards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
-  /* min-height: 400px; */
+  gap: 10px;
 `;

@@ -45,21 +45,22 @@ function Trello() {
     // });
 
     // ! 3) not Obj deep copy, only array deep copy and change
-    if (dragItemId !== dropItemId) {
-      //! 다른 보드로 움직일 때
+    if (dragItemId === dropItemId) {
+      //! 같은 board내에서 움직일 때
+      setList((oldObj) => {
+        const board = [...oldObj[dragItemId]];
+        board.splice(dragItemIdx, 1);
+        board.splice(dropItemIdx, 0, dragItem);
+        return { ...oldObj, [dragItemId]: board };
+      });
+    } else {
+      //! 다른 board로 움직일 때
       setList((oldObj) => {
         const drag = [...oldObj[dragItemId]];
         const drop = [...oldObj[dropItemId]];
         drag.splice(dragItemIdx, 1);
         drop.splice(dropItemIdx, 0, dragItem);
         return { ...oldObj, [dragItemId]: drag, [dropItemId]: drop };
-      });
-    } else {
-      setList((oldObj) => {
-        const board = [...oldObj[dragItemId]];
-        board.splice(dragItemIdx, 1);
-        board.splice(dropItemIdx, 0, dragItem);
-        return { ...oldObj, [dragItemId]: board };
       });
     }
 

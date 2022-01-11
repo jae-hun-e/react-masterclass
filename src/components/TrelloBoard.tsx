@@ -12,8 +12,13 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
     <Cotainer>
       <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
-        {(provided) => (
-          <Wrapper ref={provided.innerRef} {...provided.droppableProps}>
+        {(provided, snapshot) => (
+          <Wrapper
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+            isDreggingFromThis={Boolean(snapshot.draggingFromThisWith)}
+          >
             {list.map((toDo, index) => (
               <DragabbleCard key={toDo} toDo={toDo} index={index} />
             ))}
@@ -35,12 +40,23 @@ const Cotainer = styled.div`
   align-items: center;
 `;
 
-const Wrapper = styled.ul`
+interface IAreaProps {
+  isDreggingFromThis: boolean;
+  isDraggingOver: boolean;
+}
+
+const Wrapper = styled.ul<IAreaProps>`
   width: 200px;
   padding: 20px 10px;
   padding-top: 20px;
-
+  background-color: ${(props) =>
+    props.isDraggingOver
+      ? "#f7b733"
+      : props.isDreggingFromThis
+      ? "#ff9966"
+      : props.theme.boardColor};
   min-height: 300px;
+  transition: background-color 0.2s ease-in-out;
 `;
 
 const Title = styled.h2`

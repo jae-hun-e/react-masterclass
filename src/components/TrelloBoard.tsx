@@ -1,4 +1,5 @@
 import { Droppable } from "react-beautiful-dnd";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import DragabbleCard from "./DragabbleCard";
 
@@ -7,10 +8,26 @@ interface IBoardProps {
   boardId: string;
 }
 
+interface IFrom {
+  addList: string;
+}
+
 function TrelloBoard({ list, boardId }: IBoardProps) {
+  const { register, setValue, handleSubmit } = useForm<IFrom>();
+  const onValid = ({ addList }: IFrom) => {
+    // console.log(data);
+    setValue("addList", "");
+  };
   return (
     <Cotainer>
       <Title>{boardId}</Title>
+      {/* <Form onSubmit={handleSubmit(onValid)}>
+        <input
+          {...register("addList", { required: true })}
+          type="text"
+          placeholder={`${boardId}에 추가하기`}
+        />
+      </Form> */}
       <Droppable droppableId={boardId}>
         {(provided, snapshot) => (
           <Wrapper
@@ -30,6 +47,13 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
   );
 }
 export default TrelloBoard;
+
+const Form = styled.form`
+  width: 100%;
+  input {
+    width: 100%;
+  }
+`;
 
 const Cotainer = styled.div`
   display: flex;

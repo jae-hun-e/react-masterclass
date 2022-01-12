@@ -3,8 +3,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 import TrelloBoard from "./components/TrelloBoard";
-import { IToDoState, toDoState } from "./trelloAtom";
-import * as lodash from "lodash";
+import { toDoState } from "./trelloAtom";
 
 function Trello() {
   const [list, setList] = useRecoilState(toDoState);
@@ -27,24 +26,7 @@ function Trello() {
     // ! 같은 자리에 두었을 때 destination와 source가 동일함
     if (dragItemId === dropItemId && dragItemIdx === dropItemIdx) return;
 
-    // ! 1) Obj deep copy1
-    // setList((oldObj) => {
-    //   const cloneObj = (obj: IToDoState) => JSON.parse(JSON.stringify(obj));
-    //   const newObj = cloneObj(oldObj);
-    //   newObj[dragItemId].splice(dragItemIdx, 1);
-    //   newObj[dropItemId].splice(dropItemIdx, 0, dragItem);
-    //   return newObj;
-    // });
-
-    //! 2) Obj deep copy2 from lodash
-    // setList((oldObj) => {
-    //   const newObj = lodash.cloneDeep(oldObj);
-    //   newObj[dragItemId].splice(dragItemIdx, 1);
-    //   newObj[dropItemId].splice(dropItemIdx, 0, dragItem);
-    //   return newObj;
-    // });
-
-    // ! 3) not Obj deep copy, only array deep copy and change
+    // ! not Obj deep copy, only array deep copy and change
     if (dragItemId === dropItemId) {
       //! 같은 board내에서 움직일 때
       setList((oldObj) => {
@@ -63,15 +45,6 @@ function Trello() {
         return { ...oldObj, [dragItemId]: drag, [dropItemId]: drop };
       });
     }
-
-    // // ! 2단계 복사가 되므로 안됨
-    // setList((oldObj) => {
-    //   const newObj = { ...oldObj };
-    //   newObj[dragItemId].splice(dragItemIdx, 1);
-    //   newObj[dropItemId].splice(dropItemIdx, 0, dragItem);
-    //   console.log(newObj);
-    //   return oldObj;
-    // });
   };
   return (
     <Container>

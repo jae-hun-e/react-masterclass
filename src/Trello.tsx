@@ -1,22 +1,12 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-
 import TrelloBoard from "./components/TrelloBoard";
 import { toDoState } from "./trelloAtom";
 
 function Trello() {
   const [list, setList] = useRecoilState(toDoState);
   const onDragEnd = ({ destination, draggableId, source }: DropResult) => {
-    // console.log(
-    //   source.droppableId,
-    //   source.index,
-    //   draggableId,
-    //   "=>",
-    //   destination.droppableId,
-    //   destination.index
-    // );
-
     const dragItemId = source.droppableId;
     const dragItemIdx = source.index;
     const dropItemId = destination.droppableId;
@@ -86,4 +76,3 @@ const Boards = styled.div`
   width: 100%;
   gap: 10px;
 `;
-const test = { a: ["1", "2"], b: ["3", "4"] };

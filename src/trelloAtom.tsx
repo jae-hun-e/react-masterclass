@@ -13,18 +13,8 @@ interface IToDoState {
 export const toDoState = atom<IToDoState>({
   key: "ToDo_Trello",
   default: {
-    To_Do: [
-      { id: 1, text: "a" },
-      { id: 2, text: "b" },
-      { id: 3, text: "c" },
-    ],
-    Doing: [
-      { id: 4, text: "d" },
-      { id: 5, text: "e" },
-    ],
-    Done: [
-      { id: 6, text: "f" },
-      { id: 7, text: "g" },
-    ],
+    To_Do: [],
+    Doing: [],
+    Done: [],
   },
 });

@@ -1,15 +1,24 @@
 import * as React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { ICard, toDoState } from "../trelloAtom";
 
-interface IDragabbleCardProps {
-  id: number;
-  text: string;
+interface IDragabbleCardProps extends ICard {
   index: number;
+  boardId: string;
 }
 
-function DragabbleCard({ index, id, text }: IDragabbleCardProps) {
-  // console.log(toDo, "re-rendering");
+function DragabbleCard({ index, id, text, boardId }: IDragabbleCardProps) {
+  const setState = useSetRecoilState(toDoState);
+  //! card delete
+  const onClick = () => {
+    setState((oldObj) => {
+      const newBoard = [...oldObj[boardId]];
+      newBoard.splice(index, 1);
+      return { ...oldObj, [boardId]: newBoard };
+    });
+  };
   return (
     <Draggable key={id} draggableId={id + ""} index={index}>
       {(provided, snapshot) => (
@@ -20,6 +29,7 @@ function DragabbleCard({ index, id, text }: IDragabbleCardProps) {
           isDragging={snapshot.isDragging}
         >
           <p>🥱 {text}</p>
+          <button onClick={onClick}>del</button>
         </Card>
       )}
     </Draggable>
@@ -39,4 +49,16 @@ const Card = styled.div<{ isDragging: boolean }>`
   }
   box-shadow: ${(props) =>
     props.isDragging ? "5px 5px 5px rgba(0,0,0,0.5)" : "none"};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    width: 30px;
+    height: 15px;
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
 `;

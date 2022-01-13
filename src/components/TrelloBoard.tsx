@@ -23,13 +23,12 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // ! card 추가
+  // ! card add
   const onValid = ({ addList }: IFrom) => {
     setBoard((oldBoard) => {
       const addCard = { id: Date.now(), text: addList };
       return { ...oldBoard, [boardId]: [addCard, ...oldBoard[boardId]] };
     });
-    console.log(state);
     setValue("addList", "");
   };
   return (
@@ -56,8 +55,8 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
               <DragabbleCard
                 key={index}
                 index={index}
-                id={toDo.id}
-                text={toDo.text}
+                {...toDo}
+                boardId={boardId}
               />
             ))}
             {provided.placeholder}

@@ -17,7 +17,12 @@ interface IFrom {
 function TrelloBoard({ list, boardId }: IBoardProps) {
   const setBoard = useSetRecoilState(toDoState);
   const state = useRecoilValue(toDoState);
-  const { register, setValue, handleSubmit } = useForm();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   // ! card 추가
   const onValid = ({ addList }: IFrom) => {
     setBoard((oldBoard) => {
@@ -30,6 +35,7 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
   return (
     <Cotainer>
       <Title>{boardId}</Title>
+      <Error>{errors?.addList?.message}</Error>
       <Form onSubmit={handleSubmit(onValid)}>
         <input
           {...register("addList", { required: "text를 입력해주세요" })}
@@ -69,6 +75,13 @@ const Form = styled.form`
   input {
     width: 100%;
   }
+`;
+
+const Error = styled.span`
+  width: 100%;
+  text-align: center;
+  color: #f80759;
+  font-size: 18px;
 `;
 
 const Cotainer = styled.div`

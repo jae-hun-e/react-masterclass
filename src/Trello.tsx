@@ -1,11 +1,17 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import TrelloBoard from "./components/TrelloBoard";
-import { toDoState } from "./trelloAtom";
+import { IToDoState, toDoState } from "./trelloAtom";
+
+interface INewBoard {
+  newBoard: string;
+}
 
 function Trello() {
   const [list, setList] = useRecoilState(toDoState);
+  //! card change
   const onDragEnd = ({ destination, draggableId, source }: DropResult) => {
     const dragItemId = source.droppableId;
     const dragItemIdx = source.index;
@@ -37,10 +43,38 @@ function Trello() {
       });
     }
   };
+
+  // ! board add
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onValid = ({ newBoard }: INewBoard) => {
+    console.log(newBoard);
+    setList((oldObj) => {
+      const copyObj = { ...oldObj };
+      return { ...copyObj, [newBoard]: [] };
+    });
+    setValue("newBoard", "");
+  };
   return (
     <Container>
       <DragDropContext onDragEnd={onDragEnd}>
         <Title>Trello cloning</Title>
+        <form onSubmit={handleSubmit(onValid)}>
+          <input
+            {...register("newBoard", {
+              required: "board의 이름을 입력해주세요",
+            })}
+            type="text"
+            placeholder="새로운board 추가하기"
+          />
+          <button>add</button>
+        </form>
+        <Error>{errors?.newBoard?.message}</Error>
         <Boards>
           {Object.keys(list).map((boardId) => (
             <TrelloBoard key={boardId} boardId={boardId} list={list[boardId]} />
@@ -69,6 +103,13 @@ const Title = styled.span`
   margin-bottom: 20px;
 `;
 
+const Error = styled.span`
+  width: 100%;
+  text-align: center;
+  color: #f80759;
+  font-size: 18px;
+  margin-bottom: 20px;
+`;
 const Boards = styled.div`
   display: flex;
   justify-content: center;

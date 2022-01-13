@@ -53,7 +53,7 @@ function Trello() {
   } = useForm();
 
   const onValid = ({ newBoard }: INewBoard) => {
-    console.log(newBoard);
+    // console.log(newBoard);
     setList((oldObj) => {
       const copyObj = { ...oldObj };
       return { ...copyObj, [newBoard]: [] };

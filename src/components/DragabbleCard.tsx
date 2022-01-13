@@ -10,10 +10,10 @@ interface IDragabbleCardProps extends ICard {
 }
 
 function DragabbleCard({ index, id, text, boardId }: IDragabbleCardProps) {
-  const setState = useSetRecoilState(toDoState);
+  const setCard = useSetRecoilState(toDoState);
   //! card delete
   const onClick = () => {
-    setState((oldObj) => {
+    setCard((oldObj) => {
       const newBoard = [...oldObj[boardId]];
       newBoard.splice(index, 1);
       return { ...oldObj, [boardId]: newBoard };

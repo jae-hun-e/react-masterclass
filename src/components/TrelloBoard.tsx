@@ -1,6 +1,6 @@
 import { Droppable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { ICard, toDoState } from "../trelloAtom";
 import DragabbleCard from "./DragabbleCard";
@@ -16,14 +16,15 @@ interface IFrom {
 
 function TrelloBoard({ list, boardId }: IBoardProps) {
   const setBoard = useSetRecoilState(toDoState);
-  const state = useRecoilValue(toDoState);
+
+  // ! card add
   const {
     register,
     setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // ! card add
+
   const onValid = ({ addList }: IFrom) => {
     setBoard((oldBoard) => {
       const addCard = { id: Date.now(), text: addList };
@@ -31,9 +32,21 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
     });
     setValue("addList", "");
   };
+
+  // ! board delete
+  const deleteBoard = () => {
+    setBoard((oldObj) => {
+      const newObj = { ...oldObj };
+      delete newObj[boardId];
+      return newObj;
+    });
+  };
   return (
     <Cotainer>
-      <Title>{boardId}</Title>
+      <BoardHeader>
+        <h2>{boardId}</h2>
+        <button onClick={deleteBoard}>del</button>
+      </BoardHeader>
       <Error>{errors?.addList?.message}</Error>
       <Form onSubmit={handleSubmit(onValid)}>
         <input
@@ -111,13 +124,28 @@ const Wrapper = styled.ul<IAreaProps>`
   transition: background-color 0.2s ease-in-out;
 `;
 
-const Title = styled.h2`
-  text-align: center;
-  font-weight: 600;
-  font-size: 18px;
+const BoardHeader = styled.div`
   width: 100%;
   height: 30px;
-  padding-top: 5px;
-  border-radius: 5px;
-  background-color: ${(props) => props.theme.accentColor};
+  text-align: center;
+  position: relative;
+  h2 {
+    font-weight: 600;
+    font-size: 18px;
+    padding-top: 5px;
+    border-radius: 5px;
+    background-color: ${(props) => props.theme.accentColor};
+  }
+  button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 15px;
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
 `;

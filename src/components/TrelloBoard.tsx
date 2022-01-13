@@ -1,10 +1,12 @@
 import { Droppable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { ICard, toDoState } from "../trelloAtom";
 import DragabbleCard from "./DragabbleCard";
 
 interface IBoardProps {
-  list: string[];
+  list: ICard[];
   boardId: string;
 }
 
@@ -13,21 +15,29 @@ interface IFrom {
 }
 
 function TrelloBoard({ list, boardId }: IBoardProps) {
-  const { register, setValue, handleSubmit } = useForm<IFrom>();
+  const setBoard = useSetRecoilState(toDoState);
+  const state = useRecoilValue(toDoState);
+  const { register, setValue, handleSubmit } = useForm();
+  // ! card 추가
   const onValid = ({ addList }: IFrom) => {
-    // console.log(data);
+    setBoard((oldBoard) => {
+      const addCard = { id: Date.now(), text: addList };
+      return { ...oldBoard, [boardId]: [addCard, ...oldBoard[boardId]] };
+    });
+    console.log(state);
     setValue("addList", "");
   };
   return (
     <Cotainer>
       <Title>{boardId}</Title>
-      {/* <Form onSubmit={handleSubmit(onValid)}>
+      <Form onSubmit={handleSubmit(onValid)}>
         <input
-          {...register("addList", { required: true })}
+          {...register("addList", { required: "text를 입력해주세요" })}
           type="text"
           placeholder={`${boardId}에 추가하기`}
         />
-      </Form> */}
+        <button>add</button>
+      </Form>
       <Droppable droppableId={boardId}>
         {(provided, snapshot) => (
           <Wrapper
@@ -37,7 +47,12 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
             isDreggingFromThis={Boolean(snapshot.draggingFromThisWith)}
           >
             {list.map((toDo, index) => (
-              <DragabbleCard key={toDo} toDo={toDo} index={index} />
+              <DragabbleCard
+                key={index}
+                index={index}
+                id={toDo.id}
+                text={toDo.text}
+              />
             ))}
             {provided.placeholder}
           </Wrapper>
@@ -49,6 +64,7 @@ function TrelloBoard({ list, boardId }: IBoardProps) {
 export default TrelloBoard;
 
 const Form = styled.form`
+  display: flex;
   width: 100%;
   input {
     width: 100%;

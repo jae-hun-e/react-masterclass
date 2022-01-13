@@ -8,16 +8,15 @@ import { toDoState } from "./trelloAtom";
 function Trello() {
   const [list, setList] = useRecoilState(toDoState);
   const onDragEnd = ({ destination, draggableId, source }: DropResult) => {
-    console.log(
-      source.droppableId,
-      source.index,
-      draggableId,
-      "=>",
-      destination.droppableId,
-      destination.index
-    );
+    // console.log(
+    //   source.droppableId,
+    //   source.index,
+    //   draggableId,
+    //   "=>",
+    //   destination.droppableId,
+    //   destination.index
+    // );
 
-    const dragItem = draggableId;
     const dragItemId = source.droppableId;
     const dragItemIdx = source.index;
     const dropItemId = destination.droppableId;
@@ -31,8 +30,9 @@ function Trello() {
       //! 같은 board내에서 움직일 때
       setList((oldObj) => {
         const board = [...oldObj[dragItemId]];
+        const dragcard = board[dragItemIdx];
         board.splice(dragItemIdx, 1);
-        board.splice(dropItemIdx, 0, dragItem);
+        board.splice(dropItemIdx, 0, dragcard);
         return { ...oldObj, [dragItemId]: board };
       });
     } else {
@@ -40,8 +40,9 @@ function Trello() {
       setList((oldObj) => {
         const drag = [...oldObj[dragItemId]];
         const drop = [...oldObj[dropItemId]];
+        const dragcard = drag[dragItemIdx];
         drag.splice(dragItemIdx, 1);
-        drop.splice(dropItemIdx, 0, dragItem);
+        drop.splice(dropItemIdx, 0, dragcard);
         return { ...oldObj, [dragItemId]: drag, [dropItemId]: drop };
       });
     }

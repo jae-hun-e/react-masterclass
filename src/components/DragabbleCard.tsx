@@ -1,15 +1,18 @@
 import * as React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import { ICard } from "../trelloAtom";
 
 interface IDragabbleCardProps {
-  toDo: string;
+  id: number;
+  text: string;
   index: number;
 }
 
-function DragabbleCard({ toDo, index }: IDragabbleCardProps) {
+function DragabbleCard({ index, id, text }: IDragabbleCardProps) {
+  // console.log(toDo, "re-rendering");
   return (
-    <Draggable key={toDo} draggableId={toDo} index={index}>
+    <Draggable key={id} draggableId={id + ""} index={index}>
       {(provided, snapshot) => (
         <Card
           ref={provided.innerRef}
@@ -17,7 +20,7 @@ function DragabbleCard({ toDo, index }: IDragabbleCardProps) {
           {...provided.draggableProps}
           isDragging={snapshot.isDragging}
         >
-          <p>🥱 {toDo}</p>
+          <p>🥱 {text}</p>
         </Card>
       )}
     </Draggable>

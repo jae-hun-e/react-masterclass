@@ -1,10 +1,12 @@
 // import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
+import Motion from "./Motion";
 
 function App() {
   return (
     <>
       <GlobalStyle />
+      <Motion />
     </>
   );
 }
@@ -67,7 +69,7 @@ table {
 }
 body{
   font-family: 'Nanum Brush Script', cursive;
-  background-color: ${(props) => props.theme.bgColor};
+  background:linear-gradient(135deg,#e09,#d0e);
   color: ${(props) => props.theme.textColor};
   line-height: 1.2;
 }

@@ -1,12 +1,12 @@
 // import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
-import Motion from "./Motion";
+import Routers from "./routes/Routers";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Motion />
+      <Routers />
     </>
   );
 }

@@ -11,7 +11,7 @@ const svg = {
     pathLength: 1,
   },
 };
-// ! 일괄 적용하고 싶으면 transition default OR variants에 transition적용
+// ! 일괄 적용하고 싶으면 variants에 transition적용
 // ! 개별 적용하고 싶으면 transition prop로 적용
 
 // eslint-disable-next-line import/no-anonymous-default-export

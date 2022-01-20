@@ -29,9 +29,10 @@ export default function () {
     setBack(true);
     setVisible((prev) => (prev === 1 ? 5 : prev - 1));
   };
+
   return (
     <Wrapper>
-      <AnimatePresence custom={back}>
+      <AnimatePresence exitBeforeEnter custom={back}>
         {/* {[1, 2, 3, 4, 5].map((i) =>
           i === visible ? (
             <Box

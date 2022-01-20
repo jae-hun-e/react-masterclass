@@ -11,7 +11,17 @@ function Home() {
       </div>
       <div>
         <Link to="/slider">
-          <p>slider ref</p>
+          <p>slider Ref</p>
+        </Link>
+      </div>
+      <div>
+        <Link to="/layout">
+          <p>layout Animation</p>
+        </Link>
+      </div>
+      <div>
+        <Link to="/card">
+          <p>card</p>
         </Link>
       </div>
     </Container>
@@ -22,9 +32,10 @@ export default Home;
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
+  justify-items: center;
   div {
     width: 200px;
     height: 200px;

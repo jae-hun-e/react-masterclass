@@ -1,14 +1,21 @@
-// import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
+<<<<<<< HEAD:src/TrelloApp.tsx
 import Trello from "./Trello";
 
 // ! react-query import
+=======
+import ToDoList from "./components/ToDoList";
+>>>>>>> todolist:src/App.tsx
 
 function App() {
   return (
     <>
       <GlobalStyle />
+<<<<<<< HEAD:src/TrelloApp.tsx
       <Trello />
+=======
+      <ToDoList />
+>>>>>>> todolist:src/App.tsx
     </>
   );
 }
@@ -16,9 +23,9 @@ function App() {
 export default App;
 
 //! styled-reset : https://www.npmjs.com/package/styled-reset
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap'); */
 const GlobalStyle = createGlobalStyle`
 /* //! font.google.com에서 font import해오기 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

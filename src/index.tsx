@@ -9,7 +9,11 @@ ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <ThemeProvider theme={darkTheme}>
+<<<<<<< HEAD
         <TrelloApp />
+=======
+        <App />
+>>>>>>> todolist
       </ThemeProvider>
     </RecoilRoot>
   </React.StrictMode>,

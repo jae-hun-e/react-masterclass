@@ -1,26 +1,26 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Home() {
+function Motions() {
   return (
     <Container>
       <div>
-        <Link to="/box">
+        <Link to="/motion/box">
           <p>animation ref</p>
         </Link>
       </div>
       <div>
-        <Link to="/slider">
+        <Link to="/motion/slider">
           <p>slider Ref</p>
         </Link>
       </div>
       <div>
-        <Link to="/layout">
+        <Link to="/motion/layout">
           <p>layout Animation</p>
         </Link>
       </div>
       <div>
-        <Link to="/card">
+        <Link to="/motion/card">
           <p>card</p>
         </Link>
       </div>
@@ -28,7 +28,7 @@ function Home() {
   );
 }
 
-export default Home;
+export default Motions;
 const Container = styled.div`
   width: 100vw;
   height: 100vh;

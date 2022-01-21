@@ -5,7 +5,13 @@ export default function () {
   return (
     <>
       <div>
-        <Link to="/coinhome">coinPage</Link>
+        <Link to="/coin">coinPage</Link>
+      </div>
+      <div>
+        <Link to="/trello">TrelloApp </Link>
+      </div>
+      <div>
+        <Link to="/motion">motion </Link>
       </div>
     </>
   );

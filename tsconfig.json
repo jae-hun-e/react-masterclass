@@ -14,14 +14,14 @@
     "outDir": "./", //js파일 아웃풋 경로바꾸기
     "rootDir": "./", //루트경로 바꾸기 (js 파일 아웃풋 경로에 영향줌)
     "removeComments": true, //컴파일시 주석제거
-    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    "lib": ["ES2015", "DOM", "DOM.Iterable"]
 
-    "noImplicitAny": true, //any타입 금지 여부
+    // "noImplicitAny": true //any타입 금지 여부
 
     // "noUnusedLocals": true, //쓰지않는 지역변수, import값 있으면 에러내기
     // "noUnusedParameters": true, //쓰지않는 파라미터 있으면 에러내기
-    // "noImplicitReturns": true //함수에서 return 빼먹으면 에러내기
-    "noFallthroughCasesInSwitch": true //switch문 이상하면 에러내기
+    // "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
+    // "noFallthroughCasesInSwitch": true //switch문 이상하면 에러내기
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"]

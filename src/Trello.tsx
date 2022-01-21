@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import TrelloBoard from "./components/TrelloBoard";
-import { IToDoState, toDoState } from "./trelloAtom";
+import { toDoState } from "./trelloAtom";
 
 interface INewBoard {
   newBoard: string;
@@ -12,7 +12,7 @@ interface INewBoard {
 function Trello() {
   const [list, setList] = useRecoilState(toDoState);
   //! card change
-  const onDragEnd = ({ destination, draggableId, source }: DropResult) => {
+  const onDragEnd = ({ destination, source }: DropResult) => {
     const dragItemId = source.droppableId;
     const dragItemIdx = source.index;
     const dropItemId = destination.droppableId;

@@ -1,25 +1,35 @@
+// import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
-import Trello from "./Trello";
-import ToDoList from "./components/ToDoList";
-import Routers from "./routes/Router";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme";
+import Router from "./routes/Router";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { useRecoilValue } from "recoil";
+import { modeChange } from "./coinAtoms";
+// ! react-query import
+const queryClient = new QueryClient();
 
-function App() {
+function CoinApp() {
+  const mode = useRecoilValue(modeChange);
   return (
-    <>
-      <GlobalStyle />
-      <Trello />
-      <ToDoList />
-      <Routers />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={mode ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Router />
+      </ThemeProvider>
+      {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   );
 }
 
-export default App;
+export default CoinApp;
 
 //! styled-reset : https://www.npmjs.com/package/styled-reset
-/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap'); */
 const GlobalStyle = createGlobalStyle`
 /* //! font.google.com에서 font import해오기 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -72,7 +82,7 @@ table {
 }
 body{
   font-family: 'Nanum Brush Script', cursive;
-  background:linear-gradient(135deg,#e09,#d0e);
+  background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
   line-height: 1.2;
 }

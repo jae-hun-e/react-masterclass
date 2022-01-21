@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from "./coinApp";
+import MoviesApp from "./MoviesApp";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import { darkTheme } from "./theme";
@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <ThemeProvider theme={darkTheme}>
-        <App />
+        <MoviesApp />
       </ThemeProvider>
     </RecoilRoot>
   </React.StrictMode>,

@@ -1,25 +1,21 @@
+import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import Trello from "./Trello";
-import ToDoList from "./components/ToDoList";
-import Routers from "./routes/Router";
+import Movies from "./Movies";
+import { theme } from "./theme";
 
-function App() {
+function MoviesApp() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Trello />
-      <ToDoList />
-      <Routers />
-    </>
+      <Movies />
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default MoviesApp;
 
-//! styled-reset : https://www.npmjs.com/package/styled-reset
-/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap'); */
 const GlobalStyle = createGlobalStyle`
-/* //! font.google.com에서 font import해오기 */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -67,18 +63,18 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-*{
+* {
   box-sizing: border-box;
 }
-body{
-  font-family: 'Nanum Brush Script', cursive;
-  background:linear-gradient(135deg,#e09,#d0e);
-  color: ${(props) => props.theme.textColor};
+body {
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+  color:black;
   line-height: 1.2;
+  
 }
-
-a{
-  text-decoration: none;
-  color: inherit; // 부모것을 가져와라
+a {
+  text-decoration:none;
+  color:inherit;
 }
 `;

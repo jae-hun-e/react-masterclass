@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Switch, useRouteMatch, Route, Link } from "react-router-dom";
 import Price from "./Price";
 import Chart from "./Chart";
-import { fetchCoinInfo, fetchCoinPrice } from "../api";
+import { fetchCoinInfo, fetchCoinPrice } from "../coinApi";
 import { useQuery } from "react-query";
 import { Helmet } from "react-helmet";
 

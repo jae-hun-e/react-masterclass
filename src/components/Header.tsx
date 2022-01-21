@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { modeChange } from "../atoms";
+import { modeChange } from "../coinAtoms";
 
 function Header() {
   const [mode, setMode] = useRecoilState(modeChange);

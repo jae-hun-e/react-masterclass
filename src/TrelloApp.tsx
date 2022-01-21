@@ -1,27 +1,15 @@
 // import Circle from "./Circle";
 import { createGlobalStyle } from "styled-components";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./theme";
-import Router from "./routes/Router";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { useRecoilValue } from "recoil";
-import { modeChange } from "./atoms";
+import Trello from "./Trello";
 
 // ! react-query import
-const queryClient = new QueryClient();
 
 function App() {
-  const mode = useRecoilValue(modeChange);
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={mode ? darkTheme : lightTheme}>
-        <GlobalStyle />
-        <Router />
-      </ThemeProvider>
-      {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
-      <ReactQueryDevtools initialIsOpen={true} />
-    </QueryClientProvider>
+    <>
+      <GlobalStyle />
+      <Trello />
+    </>
   );
 }
 

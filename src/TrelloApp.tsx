@@ -1,21 +1,29 @@
 import { createGlobalStyle } from "styled-components";
 <<<<<<< HEAD:src/TrelloApp.tsx
+<<<<<<< HEAD:src/TrelloApp.tsx
 import Trello from "./Trello";
 
 // ! react-query import
 =======
 import ToDoList from "./components/ToDoList";
 >>>>>>> todolist:src/App.tsx
+=======
+import Routers from "./routes/Routers";
+>>>>>>> motion:src/App.tsx
 
 function App() {
   return (
     <>
       <GlobalStyle />
 <<<<<<< HEAD:src/TrelloApp.tsx
+<<<<<<< HEAD:src/TrelloApp.tsx
       <Trello />
 =======
       <ToDoList />
 >>>>>>> todolist:src/App.tsx
+=======
+      <Routers />
+>>>>>>> motion:src/App.tsx
     </>
   );
 }
@@ -78,7 +86,7 @@ table {
 }
 body{
   font-family: 'Nanum Brush Script', cursive;
-  background-color: ${(props) => props.theme.bgColor};
+  background:linear-gradient(135deg,#e09,#d0e);
   color: ${(props) => props.theme.textColor};
   line-height: 1.2;
 }

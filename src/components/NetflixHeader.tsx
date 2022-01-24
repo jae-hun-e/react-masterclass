@@ -14,6 +14,36 @@ const navVariants = {
   },
 };
 
+const svgVariants = {
+  top: {
+    fill: "black",
+    border: "1px solid black",
+  },
+  scroll: {
+    fill: "white",
+    border: "1px solid white",
+  },
+};
+
+const inputVariants = {
+  top: {
+    fill: "black",
+    border: "1px solid black",
+    color: "black",
+  },
+  scroll: {
+    fill: "white",
+    border: "1px solid white",
+    color: "white",
+  },
+  open: {
+    scaleX: 1,
+  },
+  close: {
+    scaleX: 0,
+  },
+};
+
 const logoVariants = {
   normal: {
     fillOpacity: 1,
@@ -38,25 +68,26 @@ function NetflixHeader() {
   const inputAnimation = useAnimation();
   const toggleSearch = () => {
     if (searchOpen) {
-      inputAnimation.start({
-        scaleX: 0,
-      });
+      inputAnimation.start("close");
     } else {
-      inputAnimation.start({
-        scaleX: 1,
-      });
+      inputAnimation.start("open");
     }
     setSearchOpen((prev) => !prev);
   };
 
   const navAnimation = useAnimation();
+  const svgAnimation = useAnimation();
   useEffect(() => {
     scrollY.onChange(() => {
       // console.log(scrollY.get());
       if (scrollY.get() < 80) {
         navAnimation.start("top");
+        inputAnimation.start("top");
+        svgAnimation.start("top");
       } else {
         navAnimation.start("scroll");
+        inputAnimation.start("scroll");
+        svgAnimation.start("scroll");
       }
     });
   }, [scrollY]);
@@ -106,6 +137,9 @@ function NetflixHeader() {
       <Col>
         <Search>
           <motion.svg
+            variants={svgVariants}
+            animate={svgAnimation}
+            initial={{ fill: "black" }}
             onClick={toggleSearch}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -118,6 +152,7 @@ function NetflixHeader() {
             ></path>
           </motion.svg>
           <Input
+            variants={inputVariants}
             animate={inputAnimation}
             initial={{ scaleX: 0 }}
             transition={{ type: "linear" }}
@@ -139,7 +174,8 @@ const Nav = styled(motion.nav)`
   padding: 10px;
   color: white;
   width: 100vw;
-  position: fixed;
+  position: sticky;
+  top: 0;
 `;
 
 const Col = styled.div`
@@ -196,4 +232,6 @@ const Input = styled(motion.input)`
   transform-origin: right center;
   position: absolute;
   left: -175px;
+  background-color: transparent;
+  border: 1px solid ${(props) => props.theme.white.lighter};
 `;

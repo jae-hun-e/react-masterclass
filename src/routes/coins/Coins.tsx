@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { fetchCoins } from "../coinApi";
+import { fetchCoins } from "../../coinApi";
 import { Helmet } from "react-helmet";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 interface CoinProps {
   id: string;
@@ -52,6 +53,8 @@ function Coins() {
           </CoinsList>
         )}
       </Container>
+      {/* //! 이걸 사용해서 캐시에 뭐가 저장되어있는지 확인 할 수 있다 */}
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }

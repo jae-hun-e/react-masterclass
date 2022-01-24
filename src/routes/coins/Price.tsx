@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { fetchCoinPriceHistory } from "../coinApi";
+import { fetchCoinPriceHistory } from "../../coinApi";
 import ApexChart from "react-apexcharts";
 
 interface IPriceProps {

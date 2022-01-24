@@ -1,20 +1,25 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
 import Trello from "../Trello";
-import Coin from "./Coin";
-import Coins from "./Coins";
-import HomePage from "./HomePage";
-import BoxMotions from "./BoxMotions";
-import Motions from "./Motions";
-import Slider from "./Slider";
-import Card from "./Card";
-import Layout from "./Layout";
+import Coin from "./coins/Coin";
+import Coins from "./coins/Coins";
+import Home from "./Home";
+import Motions from "./motions/Motions";
 import Headers from "../components/Headers";
+import Card from "./motions/Card";
+import Layout from "./motions/Layout";
+import Slider from "./motions/Slider";
+import BoxMotions from "./motions/BoxMotions";
+
+import NetflixHome from "./netflix/NetflixHome";
 
 function Router() {
   return (
     <BrowserRouter>
       <Headers />
       <Switch>
+        <Route path="/netflix/">
+          <NetflixHome />
+        </Route>
         <Route path="/motion/card">
           <Card />
         </Route>
@@ -40,7 +45,7 @@ function Router() {
           <Coins />
         </Route>
         <Route path="/">
-          <HomePage />
+          <Home />
         </Route>
       </Switch>
     </BrowserRouter>

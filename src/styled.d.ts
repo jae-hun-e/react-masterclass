@@ -10,6 +10,16 @@ declare module "styled-components" {
     cardBgColor: string;
     boardColor?: string;
     cardColor?: string;
+    red?: string;
+    black?: {
+      veryDark: string;
+      darker: string;
+      lighter: string;
+    };
+    white?: {
+      darker: string;
+      lighter: string;
+    };
     // borderRadius: string;
 
     // colors: {

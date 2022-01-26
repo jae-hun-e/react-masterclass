@@ -46,5 +46,8 @@ const Container = styled.div`
     border-radius: 10px;
     background: linear-gradient(0deg, #d5fa04, #3400ee);
     margin: 40px;
+    a {
+      padding: 80px 30px;
+    }
   }
 `;

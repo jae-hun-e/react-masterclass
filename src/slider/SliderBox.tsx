@@ -32,20 +32,7 @@ export default function () {
 
   return (
     <Wrapper>
-      <AnimatePresence exitBeforeEnter custom={back}>
-        {/* {[1, 2, 3, 4, 5].map((i) =>
-          i === visible ? (
-            <Box
-              variants={boxVariants}
-              initial="invisible"
-              animate="visible"
-              exit="exit"
-              key={i}
-            >
-              {i}
-            </Box>
-          ) : null
-        )} */}
+      <AnimatePresence exitBeforeEnter custom={back} initial={false}>
         <Box
           custom={back}
           variants={boxVariants}

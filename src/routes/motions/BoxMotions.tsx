@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Box1 from "../animation/Box1";
-import Box2 from "../animation/Box2";
-import Box3 from "../animation/Box3";
-import Box4 from "../animation/Box4";
-import Box5 from "../animation/Box5";
-import Box6 from "../animation/Box6";
-import Gradient from "../animation/gradient";
+import Box1 from "../../animation/Box1";
+import Box2 from "../../animation/Box2";
+import Box3 from "../../animation/Box3";
+import Box4 from "../../animation/Box4";
+import Box5 from "../../animation/Box5";
+import Box6 from "../../animation/Box6";
+import Gradient from "../../animation/gradient";
 
 function Motion() {
   return (

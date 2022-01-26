@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
-import { fetchCoinHistory } from "../coinApi";
+import { fetchCoinHistory } from "../../coinApi";
 import ApexChart from "react-apexcharts";
 import { useRecoilValue } from "recoil";
-import { modeChange } from "../coinAtoms";
+import { modeChange } from "../../coinAtoms";
 
 interface ChartProps {
   coinId: string;

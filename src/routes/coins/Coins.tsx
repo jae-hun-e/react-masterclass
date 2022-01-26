@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { fetchCoins } from "../coinApi";
+import { fetchCoins } from "../../coinApi";
 import { Helmet } from "react-helmet";
 
 interface CoinProps {

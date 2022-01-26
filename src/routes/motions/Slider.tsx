@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import SliderBox from "../slider/SliderBox";
-import TestBox from "../slider/TestBox";
+import SliderBox from "../../slider/SliderBox";
 
 function Slider() {
   return (
     <Container>
-      {/* <TestBox /> */}
       <SliderBox />
     </Container>
   );

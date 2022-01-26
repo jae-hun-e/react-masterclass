@@ -6,10 +6,11 @@ import Router from "./routes/Router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useRecoilValue } from "recoil";
 import { modeChange } from "./coinAtoms";
+import { ReactQueryDevtools } from "react-query/devtools";
 // ! react-query import
 const queryClient = new QueryClient();
 
-function CoinApp() {
+function App() {
   const mode = useRecoilValue(modeChange);
   return (
     <QueryClientProvider client={queryClient}>
@@ -17,11 +18,12 @@ function CoinApp() {
         <GlobalStyle />
         <Router />
       </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );
 }
 
-export default CoinApp;
+export default App;
 
 //! styled-reset : https://www.npmjs.com/package/styled-reset
 const GlobalStyle = createGlobalStyle`

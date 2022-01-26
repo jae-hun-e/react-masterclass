@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Trello from "../Trello";
 import Coin from "./coins/Coin";
 import Coins from "./coins/Coins";
@@ -17,7 +17,7 @@ function Router() {
     <BrowserRouter>
       <Headers />
       <Switch>
-        <Route path="/netflix/">
+        <Route path="/netflix">
           <NetflixHome />
         </Route>
         <Route path="/motion/card">
